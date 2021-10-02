@@ -56,10 +56,6 @@ void checkBlynkStatus()
 
 void setup()
 {
-  // Sync state to virtual pin blynk
-  Blynk.virtualWrite(V1, false);
-  Blynk.virtualWrite(V3, false);
-
   // Set pin mode output for D1,D4
   pinMode(D1, OUTPUT);
   pinMode(D4, OUTPUT);
