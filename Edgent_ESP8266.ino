@@ -11,13 +11,11 @@
 
 #include "BlynkEdgent.h"
 
-String content = "";
-char character;
 bool isInit = true;
 
 BlynkTimer timer;
 
-BLYNK_WRITE(V0)
+BLYNK_WRITE(V2)
 {
   if (digitalRead(param.asInt()) == HIGH)
   {
@@ -31,7 +29,7 @@ BLYNK_WRITE(V0)
   }
 }
 
-BLYNK_WRITE(V2)
+BLYNK_WRITE(V0)
 {
   if (digitalRead(param.asInt()) == HIGH)
   {
@@ -45,13 +43,9 @@ BLYNK_WRITE(V2)
   }
 }
 
-void checkBlynkStatus() 
+BLYNK_WRITE(V4)
 {
-  if(isInit && Blynk.connected()) 
-  {
-    Blynk.virtualWrite(V5, "PC control setup ok!!!\n=====================\nPC control started!!!\n=====================\nPC control connected to Blynk Cloud!!!\n=====================\n");
-    isInit = false;
-  }
+  Blynk.virtualWrite(V5, "ESP is online!!!\n=====================\n");
 }
 
 void setup()
@@ -65,7 +59,6 @@ void setup()
   digitalWrite(D4, HIGH);
 
   BlynkEdgent.begin();
-  timer.setInterval(1000L, checkBlynkStatus);
 }
 
 void loop()
